@@ -48,11 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Search\BaseSearch.cs" />
+    <Compile Include="Search\Filter\Constants.cs" />
+    <Compile Include="Search\Filter\FilterBuilder.cs" />
     <Compile Include="Search\Filter\FilterQuery.cs" />
     <Compile Include="Search\ISearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\QueryBuilder.cs" />
     <Compile Include="Search\SearchParameters.cs" />
+    <Compile Include="Search\ProductSearch.cs" />
+    <Compile Include="Search\SearchResult.cs" />
+    <Compile Include="Search\Sort\SortBuilder.cs" />
     <Compile Include="Search\Sort\SortOrder.cs" />
     <Compile Include="Search\Sort\SortQuery.cs" />
   </ItemGroup>

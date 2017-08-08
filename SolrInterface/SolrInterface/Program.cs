@@ -1,4 +1,6 @@
-﻿using SolrInterface.Search;
+﻿using System.Collections.Generic;
+using SolrInterface.Search;
+using SolrInterface.Search.Filter;
 
 namespace SolrInterface
 {
@@ -6,8 +8,20 @@ namespace SolrInterface
     {
         public static void Main(string[] args)
         {
-            var search = new ProductSearch();
-            search.Search(new SearchParameters());
+            var productSolrSearch = new ProductSearch();
+            var searchParameters = new SearchParameters
+            {
+                FilterBy = new List<FilterQuery>
+                {
+                    new FilterQuery()
+                    {
+                        Value = "Product 1",
+                        DataType = "String"
+                    }
+                }
+            };
+
+            productSolrSearch.Search(searchParameters);
         }
     }
 }
