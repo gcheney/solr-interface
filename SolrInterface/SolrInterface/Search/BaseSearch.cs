@@ -11,11 +11,11 @@ using SolrNet.Impl;
 
 namespace SolrInterface.Search
 {
-    public class BaseSearch<T> : ISearch<T>
+    public abstract class BaseSearch<T> : ISearch<T>
     {
-        private static ISolrReadOnlyOperations<T> _solr;
+        private readonly ISolrReadOnlyOperations<T> _solr;
 
-        public BaseSearch()
+        protected BaseSearch()
         {
             var connection = new SolrConnection("http://localhost:8983");
             Startup.Init<Product>(connection);
