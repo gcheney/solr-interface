@@ -8,6 +8,6 @@ namespace SolrInterface.Search
 {
     public interface ISearch<T>
     {
-        SearchResult<T> Search(SerachParameters parameters);
+        SearchResult<T> Search(SearchParameters parameters);
     }
 }
