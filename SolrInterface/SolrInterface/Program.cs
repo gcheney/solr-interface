@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SolrInterface.Search;
 using SolrInterface.Search.Filter;
+using SolrInterface.Search.Sort;
 
 namespace SolrInterface
 {
@@ -8,20 +10,41 @@ namespace SolrInterface
     {
         public static void Main(string[] args)
         {
-            var productSolrSearch = new ProductSearch();
             var searchParameters = new SearchParameters
             {
                 FilterBy = new List<FilterQuery>
                 {
-                    new FilterQuery()
+                    new FilterQuery
                     {
-                        Value = "Product 1",
-                        DataType = "String"
+                        FieldName = "title_text",
+                        Value = "Great Product 3",
+                        DataType = "strings"
+                    }
+                },
+                SortBy = new List<SortQuery>
+                {
+                    new SortQuery
+                    {
+                        FieldName = "id",
+                        Order = SortOrder.Ascending
                     }
                 }
             };
 
-            productSolrSearch.Search(searchParameters);
+            var productSolrSearch = new ProductSearch();
+            var searchResult = productSolrSearch.Search(searchParameters);
+
+            if (searchResult.TotalResults > 0)
+            {
+                searchResult.MatchingResults
+                    .ForEach(result => Console.WriteLine($"{result.Id}:{result.Title}"));
+            }
+            else
+            {
+                Console.WriteLine("No search results found.");
+            }
+
+            Console.ReadLine();
         }
     }
 }

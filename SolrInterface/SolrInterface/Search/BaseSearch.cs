@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Practices.ServiceLocation;
 using SolrInterface.Model;
 using SolrInterface.Search.Filter;
 using SolrInterface.Search.Sort;
 using SolrNet;
 using SolrNet.Commands.Parameters;
+using SolrNet.Exceptions;
 using SolrNet.Impl;
 
 namespace SolrInterface.Search
@@ -17,7 +16,7 @@ namespace SolrInterface.Search
 
         protected BaseSearch()
         {
-            var connection = new SolrConnection("http://localhost:8983");
+            var connection = new SolrConnection("http://localhost:8983/solr/test_core");
             Startup.Init<Product>(connection);
             _solr = ServiceLocator.Current.GetInstance<ISolrReadOnlyOperations<T>>();
         }
@@ -41,9 +40,17 @@ namespace SolrInterface.Search
                 OrderBy = SortBuilder.GetSelectedSort(parameters),
             };
 
-            var matchingResults = _solr.Query(QueryBuilder.BuildQuery(parameters), queryOptions);
-
-            return new SearchResult<T> { MatchingResults = matchingResults, TotalResults = matchingResults.NumFound };
+            try
+            {
+                var matchingResults = _solr.Query(QueryBuilder.BuildQuery(parameters), queryOptions);
+                return new SearchResult<T> { MatchingResults = matchingResults, TotalResults = matchingResults.NumFound };
+            }
+            catch (SolrConnectionException exception)
+            {
+                // log exception and return empty result
+                Console.WriteLine($"Url: {exception.Url}    Message: {exception.Message}");
+                return new SearchResult<T>();
+            }
         }
     }
 }

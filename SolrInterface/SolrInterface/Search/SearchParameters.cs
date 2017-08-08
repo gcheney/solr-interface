@@ -7,7 +7,7 @@ namespace SolrInterface.Search
 {
     public class SearchParameters
     {
-        public const int DefaultPageSize = 4;
+        public const int DefaultPageSize = 5;
 
         public SearchParameters()
         {
@@ -19,6 +19,21 @@ namespace SolrInterface.Search
             PageIndex = 1;
         }
 
+        public SearchParameters(IDictionary<string, string> searchFor = null, 
+            IDictionary<string, string> exclude = null, 
+            IList<SortQuery> sortBy = null, 
+            IList<FilterQuery> filterBy = null, 
+            int pageSize = DefaultPageSize, 
+            int pageIndex = 1)
+        {
+            SearchFor = searchFor;
+            Exclude = exclude;
+            SortBy = sortBy;
+            FilterBy = filterBy;
+            PageSize = pageSize;
+            PageIndex = pageIndex;
+        }
+
         public string FreeSearch { get; set; }
         public int PageIndex { get; set; }
         public int PageSize { get; set; }
@@ -27,5 +42,4 @@ namespace SolrInterface.Search
         public IList<SortQuery> SortBy { get; set; }
         public IList<FilterQuery> FilterBy { get; set; }
     }
-}
 }
