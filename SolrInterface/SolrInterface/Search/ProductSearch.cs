@@ -2,7 +2,7 @@
 
 namespace SolrInterface.Search
 {
-    public class SearchProduct : BaseSearch<Product>
+    public class ProductSearch : BaseSearch<Product>
     {
     }
 }

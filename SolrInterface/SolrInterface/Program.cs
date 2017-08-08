@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SolrInterface.Search;
 
 namespace SolrInterface
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            var search = new ProductSearch();
+            search.Search(new SearchParameters());
         }
     }
 }
