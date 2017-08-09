@@ -11,11 +11,10 @@ namespace SolrInterface.Search.Sort
     {
         public static ICollection<SolrNet.SortOrder> GetSelectedSort(SearchParameters parameters)
         {
-            return parameters.SortBy
-                .Select(sortBy => sortBy.Order.Equals(SortOrder.Ascending)
+            return parameters.SortBy.Select(
+                sortBy => sortBy.Order.Equals(SortOrder.Ascending)
                     ? new SolrNet.SortOrder(sortBy.FieldName, Order.ASC)
-                    : new SolrNet.SortOrder(sortBy.FieldName, Order.DESC))
-                .ToList();
+                    : new SolrNet.SortOrder(sortBy.FieldName, Order.DESC)).ToList();
         }
     }
 }

@@ -36,8 +36,8 @@ namespace SolrInterface
 
             if (searchResult.TotalResults > 0)
             {
-                searchResult.MatchingResults
-                    .ForEach(result => Console.WriteLine($"{result.Id}:{result.Title}"));
+                searchResult.MatchingResults.ForEach(
+                    result => Console.WriteLine($"{result.Id}:{result.Title}"));
             }
             else
             {

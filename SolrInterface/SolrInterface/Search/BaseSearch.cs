@@ -43,7 +43,11 @@ namespace SolrInterface.Search
             try
             {
                 var matchingResults = _solr.Query(QueryBuilder.BuildQuery(parameters), queryOptions);
-                return new SearchResult<T> { MatchingResults = matchingResults, TotalResults = matchingResults.NumFound };
+                return new SearchResult<T>
+                {
+                    MatchingResults = matchingResults, 
+                    TotalResults = matchingResults.NumFound
+                };
             }
             catch (SolrConnectionException exception)
             {
